@@ -4,7 +4,13 @@ import axios from "axios";
 import Image from "next/image";
 import { Info } from "lucide-react";
 import { useRouter } from 'next/navigation';
-import CodePreview from '@/app/homepage/codeeditor/page';
+// import CodePreview from '@/app/homepage/codeeditor/page';
+const CodePreview = ({ initialCode }: { initialCode: string }) => (
+  <div className="p-4 border rounded bg-gray-800 text-white">
+    <h3 className="text-xl mb-2">Code Generated:</h3>
+    <pre className="overflow-auto">{initialCode}</pre>
+  </div>
+);
 
 const Webllix: React.FC = () => {
   const [userId, setUserId] = useState<string | null>(null);
@@ -173,7 +179,7 @@ const Webllix: React.FC = () => {
                 className="border border-gray-700 bg-gray-800 text-white px-4 py-3 rounded-md w-full text-lg"
               />
             </div>
-            
+
             <div className="flex justify-center mt-6">
               <button
                 className="text-white bg-gradient-to-r from-[#110501] to-[#FF6347] hover:from-[#FF6347] hover:to-[#6b80ec] shadow-lg hover:shadow-xl font-extralight rounded-full text-lg px-12 py-4 transition-transform transform hover:scale-105 duration-300 ease-in-out"
@@ -212,8 +218,8 @@ const Webllix: React.FC = () => {
         </div>
         {incomingImages.length > 0 && (
           <div className="mt-8">
-            <button 
-              onClick={SendImage} 
+            <button
+              onClick={SendImage}
               disabled={codeLoading || !selectedImage}
               className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
             >

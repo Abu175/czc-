@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { imageCache } from '@/app/api/users/generate/route';
+// import { imageCache } from '@/app/api/users/generate/route';
+const imageCache = new Map<string, string>();
 
 
 export async function GET(request: Request) {
@@ -23,7 +24,7 @@ export async function GET(request: Request) {
     const contentType = response.headers.get('Content-Type');
     headers.set('Content-Type', contentType || 'image/jpeg');
 
-    return new NextResponse(arrayBuffer, { 
+    return new NextResponse(arrayBuffer, {
       headers,
       status: 200,
     });

@@ -27,7 +27,7 @@ async function getDatabase() {
 import { google } from 'googleapis';
 
 async function uploadToPlatform(videoBuffer: Buffer, platform: string, token: PlatformAuth.PlatformTokenData, title: string, description: string, privacy: string) {
-  let apiUrl: string;
+  let apiUrl: string = '';
   const formData = new FormData();
 
   switch (platform) {
@@ -42,12 +42,9 @@ async function uploadToPlatform(videoBuffer: Buffer, platform: string, token: Pl
       formData.append("file", videoBuffer, { filename: "video.mp4" });
       formData.append("access_token", token.accessToken);
       break;
-
-    
-
-    
+  }
   // For platforms other than YouTube
-  if (["instagram", "facebook", ].includes(platform)) {
+  if (["instagram", "facebook",].includes(platform)) {
     const response = await axios.post(apiUrl, formData, {
       headers: { ...formData.getHeaders(), Authorization: `Bearer ${token.accessToken}` },
     });
